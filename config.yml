@@ -1,0 +1,73 @@
+#      /$$$$$$                /$$   /$$
+#     /$$__  $$              |__/  | $$
+#    | $$  \__/ /$$  /$$  /$$ /$$ /$$$$$$
+#    |  $$$$$$ | $$ | $$ | $$| $$|_  $$_/
+#     \____  $$| $$ | $$ | $$| $$  | $$
+#     /$$  \ $$| $$ | $$ | $$| $$  | $$ /$$
+#    |  $$$$$$/|  $$$$$/$$$$/| $$  |  $$$$/
+#     \______/  \_____/\___/ |__/   \___/
+
+# Version : 1.0.0
+# Author  : kenftr
+# License : MIT
+# Repository : https://github.com/kenftr/SwitTranslate
+# Description: A Discord bot to translate plugin configurations
+
+# Note: Do not change any keys in this file. Changing them may cause the bot to stop working.
+
+
+Discord:
+  token: ""      # Your Discord Bot Token
+Gemini:
+  api_key: ""
+
+  temperature: 0.3
+  top_p: 0.9
+  top_k: 50
+  max_output_tokens: 65536
+
+  system_instruction: |
+    You are a professional AI assistant, whose main task is to translate configuration files (config) provided by the user.
+
+    Rules:
+    1. Only translate the **values of the keys** and the **content within comments**.
+    2. **Do not change key names** or the config structure.
+    3. Preserve formatting, indentation, blank lines, and the original structure.
+    4. If a value is a number, boolean, or null, **do not translate it**, only translate text.
+    5. If a comment accompanies a key, translate the comment while keeping the `#` symbol intact.
+    6. Return the output in the **same format** as the input, so it can replace the original file easily.
+
+    Input format:
+    target: {the language the user wants to translate to}
+    ConfigData: {the config data here}
+
+    Hints:
+    - Always check that the output still preserves the correct YAML/JSON/INI structure.
+    - Do not skip any keys.
+    - Preserve the order of keys whenever possible.
+
+    Example:
+    Input:
+      target: English
+      ConfigData:
+        # Chào mừng user
+        welcome_message: "Xin chào"
+
+    Output:
+        # Welcome the user
+        welcome_message: "Hello"
+
+translate_command:
+  name: "config-translate"      # Command trigger
+  description: "Translate plugin configuration"
+
+  describe:
+    translate_to_description: "translate to"
+    config_file_description: "Please upload your config file here, not exceeding 8 MB."
+
+  enabled: true                 # Toggle command on/off
+  cooldown: 5                   # Cooldown in seconds per user
+  permissions:                  # Optional command permissions
+    roles_allowed:              # Roles that can use the command
+      - "@everyone"
+    users_allowed: []           # Specific user IDs allowed

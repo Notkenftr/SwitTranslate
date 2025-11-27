@@ -1,0 +1,17 @@
+{
+  "before_start_translate": {
+    "title": "🔖 Getting Ready!",
+    "description": "Hang tight! We're reading your file now.",
+    "color": "#88F899"
+  },
+  "after_start_translate": {
+    "title": "🔖 Translating Your File",
+    "description": "Your file is being translated. This should take about 20 seconds.",
+    "color": "#88F899"
+  },
+  "after_translate": {
+    "title": "🔖 Translation Complete!",
+    "description": "Your file is ready. Please review it before use.",
+    "color": "#41FC5E"
+  }
+}
